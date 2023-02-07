@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>please input </title>
+	<style type="text/css">
+		* {box-sizing: border-box;}
+		body {margin: 0; padding: 0;}
+		.wrapper {max-width: 600px; margin: 0 auto; background: yellowgreen;}
+		.inp-wrapper {max-width: 500px; margin: 0 auto; padding: 10px 10px; background: #77ea77;}
+		.binding {margin-bottom: 15px;}
+		.inp-wrapper input, button {display: block; width: 100%;}
+		.inp-wrapper input ,button{margin: 5px 0; padding: 8px 5px; border: none; border-radius: 3px;}
+		.inp-wrapper label {font-size: 20px;}
+		button {font-size: 15px; font-weight: bold; background: #0028ff; color: #fff;}
+		.lwr {width: 120px; margin: 20px;}
+		#maplink {display: block;text-decoration: none;background: pink;padding: 10px 10px; font-weight: bold; color: #fff; border-radius: 3px;}
+		
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- input area start -->
+	  <div class="inp-wrapper">
+	  	<div class="binding">
+			 <label for="lat">latitude</label>
+	         <input type="number" id="lat" name="lat" placeholder="latitude">
+         </div>
+         <div class="binding">
+	         <label for="lon">longitude</label>
+	         <input type="number" id="lon" name="lon" placeholder="longitude">
+         </div>
+         <button type="button" id="submit" onclick="inputval();">Get location</button>
+      </div>
+      <!-- input area end -->
+
+      <!-- map link start-->
+      <div class="lwr">
+      	<a id="maplink" target="_blank">Go to Map</a>
+      </div>
+      <!-- map link end-->
+
+      <!-- map start -->
+      <div id="demo" style="max-width: 600px; height: 400px; margin: 10px 0; background: blue;"></div>
+      <!-- map end -->
+
+     </div>
+
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+	function inputval(){
+    	var lat = document.getElementById("lat").value.trim();
+    	var lon = document.getElementById("lon").value.trim();
+
+    //dynamic link of map
+    	document.getElementById("maplink").href = "https://www.google.com/maps/@"+lat+','+lon+','+'8.50z';
+
+    //map
+    	var lattlong = new google.maps.LatLng(lat, lon); 
+    	var myOptions = { 
+        center: lattlong, 
+        zoom: 15, 
+        mapTypeControl: true, 
+        navigationControlOptions: {style:google.maps.NavigationControlStyle.SMALL} 
+    } 
+    	var maps = new google.maps.Map(document.getElementById("demo"), myOptions); 
+    	var markers = new google.maps.Marker({position:lattlong, map:maps, title:"You are here!"});
+
+}
+
+
+</script>
+</body>
+</html>
